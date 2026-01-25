@@ -1,0 +1,13 @@
+/*@import './output.css';*/
+/*@import './font.css';*/
+/*@import './main.css';*/
+/*@import './owl.carousel.min.css';*/
+/*@import './owl.theme.default.min.css';*/
+/*@import './rangeInput.css';*/
+/*@import './style.product.slider.css';*/
+/*@import './swiper-bundle.min.css';*/
+/*@import './toastify.css';*/
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

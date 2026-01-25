@@ -1,0 +1,7 @@
+@font-face {
+  font-family: VAZIR;
+  src: url("../assets/fonts/Vazirmatn-FD-Medium.woff2");
+}
+*{
+  font-family: VAZIR, serif;
+}
