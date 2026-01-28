@@ -10,19 +10,41 @@ class ProductSeeder extends Seeder
 {
     public function run(): void
     {
-        Product::create([
-            'title' => 'گوشی موبایل اپل مدل iPhone 13 Pro تک سیم کارت ظرفیت یک ترابایت و رم 6 گیگابایت',
-            'en_title' => 'Apple iPhone 13 Pro Single SIM 1TB And 6GB RAM Mobile Phone',
-            'description' => 'مدل اقتصادی با امکانات مناسب برای کارهای روزمره.',
-            'base_price' => 10000000,
-            'image' => 'samsung-a15.jpg',
-        ]);
+        $products = [
+            [
+                'category_id' => 7,
+                'name' => 'گوشی موبایل سامسونگ Galaxy S23',
+                'en_name' => 'Samsung Galaxy s23 Mobile Phone',
+                'slug' => 'samsung-galaxy-s23',
+                'short_description' => 'پرچمدار سامسونگ',
+                'price' => 45000000,
+                'thumbnail' => 'products/s23/main.jpg',
+            ],
+            [
+                'category_id' => 7,
+                'name' => 'گوشی موبایل اپل مدل iPhone 13 Pro',
+                'en_name' => 'Apple iPhone 13 Pro Mobile Phone',
+                'slug' => 'iphone-14',
+                'short_description' => 'پرچمدار اپل',
+                'price' => 60000000,
+                'thumbnail' => 'products/iphone14/main.jpg',
+            ],
+            [
+                'category_id' => 9,
+                'name' => 'هدفون بی‌سیم JBL',
+                'en_name' => 'JBL Headphone bluetooth',
+                'short_description' => 'کیفیت صدای عالی و باتری ۳۰ ساعته.',
+                'slug' => 'headphone-JBL',
+                'price' => 3500000,
+                'thumbnail' => 'jbl-headphones.jpg',
+            ]
+        ];
 
-        Product::create([
-            'title' => 'هدفون بی‌سیم JBL',
-            'description' => 'کیفیت صدای عالی و باتری ۳۰ ساعته.',
-            'base_price' => 3500000,
-            'image' => 'jbl-headphones.jpg',
-        ]);
+        foreach ($products as $data) {
+            Product::updateOrCreate(
+                ['slug' => $data['slug']],
+                $data
+            );
+        }
     }
 }

@@ -9,7 +9,7 @@ class PermissionSeeder extends Seeder
 {
     public function run(): void
     {
-        $permissions = [
+//        $permissions = [
 //            // Users
 //            'users.view', 'users.create', 'users.update', 'users.delete',
 //
@@ -30,14 +30,12 @@ class PermissionSeeder extends Seeder
 //
 //            // Reports
 //            'reports.view',
-            ['name' => 'all', 'caption' => 'همه دسترسی ها'],
-        ];
+//            ['name' => 'all', 'caption' => 'همه دسترسی ها'],
+//        ];
 
-        foreach ($permissions as $permission) {
-            Permission::updateOrCreate(
-                ['name' => $permission['name']],
-                ['caption' => $permission['caption']],
-            );
-        }
+        Permission::updateOrCreate(
+            ['name' => 'all'],
+            ['caption' => 'همه دسترسی ها']
+        );
     }
 }

@@ -18,19 +18,20 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             PermissionSeeder::class,
             RolePermissionSeeder::class,
+            UserSeeder::class,
+            UserRoleSeeder::class,
 
-//            SettingSeeder::class,
-//
-//            UserSeeder::class,
-//            WalletSeeder::class,
-//            AddressSeeder::class,
-//
-//            CategorySeeder::class,
-//            AttributeSeeder::class,
-//
-//            ProductSeeder::class,
-//            ProductVariantSeeder::class,
-//            ProductImageSeeder::class,
+            SettingSeeder::class,
+
+            WalletSeeder::class,
+            AddressSeeder::class,
+
+            CategorySeeder::class,
+            AttributeSeeder::class,
+
+            ProductSeeder::class,
+            ProductVariantSeeder::class,
+            ProductImageSeeder::class,
 //
 //            PriceHistorySeeder::class,
 //
@@ -40,6 +41,8 @@ class DatabaseSeeder extends Seeder
 //
 //            ReviewSeeder::class,
 //            QuestionAnswerSeeder::class,
+//
+//            ... and others seeders .............................. -------->>>>
         ]);
     }
 }

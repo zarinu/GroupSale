@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     protected $fillable = ['name', 'caption', 'guard_name', 'description'];
+    const UPDATED_AT = null;
 
 }

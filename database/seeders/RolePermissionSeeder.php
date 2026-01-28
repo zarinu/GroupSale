@@ -9,6 +9,9 @@ class RolePermissionSeeder extends Seeder
 {
     public function run(): void
     {
-
+        RolePermission::updateOrCreate(
+            ['role_id' => 1],
+            ['permission_id' => 1]
+        );
     }
 }
