@@ -28,4 +28,9 @@ class ProductVariant extends Model
             'attribute_value_id'
         )->withTimestamps();
     }
+
+    public function priceHistories()
+    {
+        return $this->hasMany(PriceHistory::class);
+    }
 }

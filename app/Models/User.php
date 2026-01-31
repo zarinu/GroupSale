@@ -46,14 +46,44 @@ class User extends Authenticatable
         ];
     }
 
-    public function groupSaleOrders()
+//    public function groupSalePart()
+//    {
+//        return $this->hasMany(GroupSaleOrder::class);
+//    }
+
+    public function roles()
     {
-        return $this->hasMany(GroupSaleOrder::class);
+        return $this->belongsToMany(Role::class, 'user_roles')->withTimestamps();
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
     }
 
     public function wallet()
     {
         return $this->hasOne(Wallet::class);
+    }
+
+    public function addresses()
+    {
+        return $this->hasMany(Address::class);
+    }
+
+    public function wishlist()
+    {
+        return $this->belongsToMany(Product::class, 'wishlists')->withTimestamps();
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
+    public function notifications()
+    {
+        return $this->hasMany(Notification::class);
     }
 
 }

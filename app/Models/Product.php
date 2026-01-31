@@ -12,4 +12,33 @@ class Product extends Model
     {
         return $this->hasMany(GroupSale::class);
     }
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function images()
+    {
+        return $this->hasMany(ProductImage::class);
+    }
+
+    public function variants()
+    {
+        return $this->hasMany(ProductVariant::class);
+    }
+
+    public function attributeValues()
+    {
+        return $this->belongsToMany(
+            AttributeValue::class,
+            'product_attribute_values'
+        )->withTimestamps();
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
 }

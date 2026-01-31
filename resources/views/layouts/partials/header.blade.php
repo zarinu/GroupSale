@@ -127,7 +127,7 @@
                   @mouseenter="showChildren=true"
                   @mouseleave="showChildren=false">
             <a
-                    href="./login.html"
+                    href="{{route('login')}}"
                     class="flex items-center h-10 leading-10 px-3 mx-1 transition rounded-xl hover:bg-red-50">
               <img class="ml-1 w-6" src="{{ asset('assets/images/others/user.png') }}" alt="" />
                 @if(auth()->check())
@@ -143,18 +143,19 @@
                 <img class="w-4 mr-1" src="{{ asset('assets/images/others/chevron-down-login.png') }}" alt="" />
               </span>
             </a>
-            <div
-                    class="bg-white rounded-2xl shadow-md border-gray-50 text-sm absolute top-auto right-0 w-64 z-30 mt-1"
-                    x-show="showChildren"
-                    x-transition:enter="transition ease duration-300 transform"
-                    x-transition:enter-start="opacity-0 translate-y-2"
-                    x-transition:enter-end="opacity-100 translate-y-0"
-                    x-transition:leave="transition ease duration-300 transform"
-                    x-transition:leave-start="opacity-100 translate-y-0"
-                    x-transition:leave-end="opacity-0 translate-y-4"
-                    style="display: none"
-                    @mouseenter="showChildren=true"
-                    @mouseleave="showChildren=false">
+              @if(auth()->check())
+                  <div
+                          class="bg-white rounded-2xl shadow-md border-gray-50 text-sm absolute top-auto right-0 w-64 z-30 mt-1"
+                          x-show="showChildren"
+                          x-transition:enter="transition ease duration-300 transform"
+                          x-transition:enter-start="opacity-0 translate-y-2"
+                          x-transition:enter-end="opacity-100 translate-y-0"
+                          x-transition:leave="transition ease duration-300 transform"
+                          x-transition:leave-start="opacity-100 translate-y-0"
+                          x-transition:leave-end="opacity-0 translate-y-4"
+                          style="display: none"
+                          @mouseenter="showChildren=true"
+                          @mouseleave="showChildren=false">
               <div class="bg-white rounded-2xl w-full relative z-10 py-2 px-2">
                 <ul class="list-reset">
                   <li
@@ -170,7 +171,7 @@
                       ><img
                                   class="w-8 ml-2"
                                   src="{{ asset('assets/images/others/userNotImage.png') }}"
-                                  alt="" />امیررضا کریمی</span
+                                  alt="" />{{auth()->user()->name}}</span
                       >
                     </a>
                   </li>
@@ -211,18 +212,24 @@
                           x-data="{showChildren:false}"
                           @mouseleave="showChildren=false"
                           @mouseenter="showChildren=true">
-                    <a
-                            href="#"
-                            class="px-4 py-2 flex w-full items-start hover:bg-red-50 rounded-xl">
-                      <span class="flex justify-center items-center text-sm opacity-90"
-                      ><img class="w-5 ml-1" src="{{ asset('assets/images/others/exit.png') }}" alt="" />خروج
-                        از حساب کاربری</span
-                      >
-                    </a>
+                    <form method="POST" action="{{ route('logout') }}" class="w-full">
+                        @csrf
+                        <button
+                                type="submit"
+                                class="px-4 py-2 flex w-full items-start hover:bg-red-50 rounded-xl"
+                        >
+                            <span class="flex justify-center items-center text-sm opacity-90">
+                                <img class="w-5 ml-1" src="{{ asset('assets/images/others/exit.png') }}" alt="" />
+                                خروج از حساب کاربری
+                            </span>
+                        </button>
+                    </form>
+
                   </li>
                 </ul>
               </div>
             </div>
+              @endif
           </span>
             <span
                     class="block relative"

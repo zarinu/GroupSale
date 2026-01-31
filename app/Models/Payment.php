@@ -6,13 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Payment extends Model
 {
-    public function groupSale()
+    public function order()
     {
-        return $this->belongsTo(GroupSale::class);
+        return $this->belongsTo(Order::class);
     }
 
-    public function user()
+    public function refund()
     {
-        return $this->belongsTo(User::class);
+        return $this->hasOne(Refund::class);
     }
 }

@@ -22,8 +22,13 @@ class GroupSale extends Model
         return $this->hasMany(GroupSaleOrder::class);
     }
 
-    public function priceTiers()
+    public function productVariant()
     {
-        return $this->hasMany(PriceTier::class)->orderByDesc('min_buyers');
+        return $this->belongsTo(ProductVariant::class);
+    }
+
+    public function participants()
+    {
+        return $this->hasMany(GroupSaleParticipant::class)->orderByDesc('min_buyers');
     }
 }

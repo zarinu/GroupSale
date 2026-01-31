@@ -17,4 +17,9 @@ class WalletTransaction extends Model
     {
         return $this->morphTo();
     }
+
+    public function wallet()
+    {
+        return $this->belongsTo(Wallet::class);
+    }
 }

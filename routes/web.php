@@ -1,55 +1,109 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\GroupSaleController;
-use App\Http\Controllers\GroupSaleJoinController;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\{CartController,
+    GroupSaleController,
+    GroupSaleJoinController,
+    HomeController,
+    OrderController,
+    PaymentController,
+    ProductController,
+    ProfileController,
+    Admin\DashboardController as AdminDashboardController,
+    Admin\UsersController as AdminUsersController,
+    WalletController};
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard2');
-
-Route::get('/gdashboard', [GroupSaleController::class, 'dashboard'])->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
-
+/**
+ * The General Routes
+ * --------------------------------------------------------------------------------------------------------
+ */
 require __DIR__.'/auth.php';
 
-Route::get('/home', [GroupSaleController::class, 'index'])->name('home');
+// Home page
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/products/{product}', [ProductController::class, 'show'])->name('products.show');
+// Products
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/products/{product:slug}', [ProductController::class, 'show'])->name('products.show');
 
-Route::post('/group-sales/{groupSale}/join', [GroupSaleController::class, 'join'])->middleware('auth')->name('group-sales.join');
-
-Route::middleware('auth')->group(function () {
-    Route::post('/group-sales/{groupSale}/join', [GroupSaleJoinController::class, 'confirm'])
-        ->name('group-sales.join');
-
-    Route::post('/group-sales/{groupSale}/process', [GroupSaleJoinController::class, 'process'])
-        ->name('group-sales.process');
+// Carts
+Route::prefix('cart')->name('cart.')->group(function () {
+    Route::get('/', [CartController::class, 'index'])->name('index');
+    Route::post('/add', [CartController::class, 'add'])->name('add');
+    Route::delete('/remove/{item}', [CartController::class, 'remove'])->name('remove');
 });
 
-Route::get('/search', function () {
-    return 'صفحه جستجو';
-})->name('search');
-
-
-
-
+// common routes
 Route::get('/about', function () { return view('pages.misc.about'); });
 Route::get('/blog/show', function () { return view('pages.blogs.show'); });
 Route::get('/blog', function () { return view('pages.blogs.index'); });
 Route::get('/cart', function () { return view('pages.cart.index'); });
 
-Route::get('/forbidden', function () {
-    abort(403);
+Route::get('/search', function () { return 'صفحه جستجو'; })->name('search');
+Route::get('/forbidden', function () { abort(403); });
+
+/**
+ * Auth Needed Routes for users
+ * --------------------------------------------------------------------------------------------------------
+ */
+Route::middleware('auth')->group(function () {
+    // داشبورد
+    Route::get('/dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
+
+    // پروفایل
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // فروش گروهی
+    Route::post('/group-sales/{groupSale}/join', [GroupSaleJoinController::class, 'confirm'])
+        ->name('group-sales.join');
+    Route::post('/group-sales/{groupSale}/process', [GroupSaleJoinController::class, 'process'])
+        ->name('group-sales.process');
+
+    // سفارش‌ها
+    Route::prefix('orders')->name('orders.')->group(function () {
+        Route::post('/create', [OrderController::class, 'store'])->name('store');
+        Route::get('/{order}', [OrderController::class, 'show'])->name('show');
+    });
+
+    // پرداخت
+    Route::prefix('payment')->name('payment.')->group(function () {
+        Route::post('/wallet', [PaymentController::class, 'payWithWallet'])->name('wallet');
+        Route::post('/gateway', [PaymentController::class, 'payWithGateway'])->name('gateway');
+        Route::get('/callback', [PaymentController::class, 'callback'])->name('callback');
+    });
+
+    // کیف پول
+    Route::prefix('wallet')->name('wallet.')->group(function () {
+        Route::get('/', [WalletController::class, 'index'])->name('index');
+        Route::post('/charge', [WalletController::class, 'charge'])->name('charge');
+    });
 });
+
+/**
+ * Admin Routes
+ * --------------------------------------------------------------------------------------------------------
+ */
+Route::prefix('admin')
+    ->middleware(['auth', 'admin'])
+    ->name('admin.')
+    ->group(function () {
+
+        // Dashboard
+        Route::get('/', [AdminDashboardController::class, 'index']);
+
+        // Users Management
+        Route::prefix('users')->controller(AdminUsersController::class)->group(function () {
+            Route::get('/', 'index');
+            Route::get('/grid', 'grid')->name('users.grid');
+            Route::get('/create', 'create');
+            Route::post('/store', 'store');
+            Route::prefix('{user}')->group(function() {
+                Route::get('/edit', 'edit');
+                Route::post('/update', 'update');
+                Route::get('/delete', 'delete');
+            });
+        });
+    });
