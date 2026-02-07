@@ -4,19 +4,9 @@
 @section('content')
     <!-- MAIN -->
     <div class="max-w-[1440px] mx-auto px-3">
-        <div class="flex gap-x-2 px-10 mt-5 md:mt-10">
-            <div>
-                <a href="" class="hover:text-red-500 transition text-sm opacity-70">خانه</a>
-            </div>
-            <div class="opacity-70">/</div>
-            <div>
-                <a href="" class="hover:text-red-500 transition text-sm opacity-70">کالای دیجیتال</a>
-            </div>
-            <div class="opacity-70">/</div>
-            <div>
-                <a href="" class="hover:text-red-500 transition text-sm opacity-70">موبایل</a>
-            </div>
-        </div>
+
+        @include('layouts.partials.breadcrumb', ['breadcrumbs' => $breadcrumbs])
+
         <div class="bg-white shadow-xl my-5 md:my-10 rounded-xl md:rounded-2xl p-3 md:p-5">
             <div class="p-3 w-11/12 mx-auto rounded-2xl">
                 <div class="lg:flex">

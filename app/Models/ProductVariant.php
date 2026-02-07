@@ -33,4 +33,9 @@ class ProductVariant extends Model
     {
         return $this->hasMany(PriceHistory::class);
     }
+
+    public function groupSales()
+    {
+        return $this->hasMany(GroupSale::class);
+    }
 }

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{CartController,
+    CategoryController,
     GroupSaleController,
     GroupSaleJoinController,
     HomeController,
@@ -38,6 +39,10 @@ Route::get('/about', function () { return view('pages.misc.about'); });
 Route::get('/blog/show', function () { return view('pages.blogs.show'); });
 Route::get('/blog', function () { return view('pages.blogs.index'); });
 Route::get('/cart', function () { return view('pages.cart.index'); });
+
+// Categories
+Route::get('/category/{category:slug}', [CategoryController::class, 'show'])
+    ->name('category.show');
 
 Route::get('/search', function () { return 'صفحه جستجو'; })->name('search');
 Route::get('/forbidden', function () { abort(403); });

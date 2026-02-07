@@ -8,11 +8,6 @@ class Product extends Model
 {
     protected $fillable = ['title', 'description', 'base_price', 'image'];
 
-    public function groupSales()
-    {
-        return $this->hasMany(GroupSale::class);
-    }
-
     public function category()
     {
         return $this->belongsTo(Category::class);

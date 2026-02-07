@@ -5,46 +5,60 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\GroupSale;
-use App\Models\GroupSaleOrder;
-use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
-    public function show(Product $product)
+    public function show(Product $product, Request $request)
     {
-        $groupSale = $product->groupSales()
-            ->where('status', 'active')
-            ->where('end_time', '>', now())
-            ->with(['priceTiers' => fn ($q) => $q->orderBy('min_buyers')])
-            ->first();
+        $category = $product->category;
+        $breadcrumbs = $category->ancestors()->push($category);
 
-        $joined = false;
-        $participantsCount = 0;
-        $currentTier = null;
+        $variant = null;
+        $groupSale = null;
 
-        if ($groupSale) {
-            $participantsCount = $groupSale->orders()
-                ->where('payment_status', '!=', 'pending')
-                ->count();
+        // آیا کاربر variant انتخاب کرده؟
+        if ($request->filled(['memory', 'color'])) {
 
-            $currentTier = $groupSale->priceTiers
-                ->where('min_buyers', '<=', $participantsCount)
-                ->sortByDesc('min_buyers')
+
+            $groupSale = GroupSale::whereHas('productVariant', function ($q) use ($product) {
+                $q->where('product_id', $product->id);
+            })
+                ->where('status', 'active')
+                ->where('end_time', '>', now())
+                ->with(['priceTiers' => fn ($q) => $q->orderBy('min_buyers')])
                 ->first();
 
-            if (auth()->check()) {
-                $joined = $groupSale->orders()
-                    ->where('user_id', auth()->id())
-                    ->exists();
+            $joined = false;
+            $participantsCount = 0;
+            $currentTier = null;
+
+            if ($groupSale) {
+                $participantsCount = $groupSale->orders()
+                    ->where('payment_status', '!=', 'pending')
+                    ->count();
+
+                $currentTier = $groupSale->priceTiers
+                    ->where('min_buyers', '<=', $participantsCount)
+                    ->sortByDesc('min_buyers')
+                    ->first();
+
+                if (auth()->check()) {
+                    $joined = $groupSale->orders()
+                        ->where('user_id', auth()->id())
+                        ->exists();
+                }
             }
         }
 
         return view('pages.products.single', compact(
+            'breadcrumbs',
             'product',
             'groupSale',
-            'participantsCount',
-            'currentTier',
-            'joined'
+            'variant',
+//            'participantsCount',
+//            'currentTier',
+//            'joined'
         ));
     }
+
 }
