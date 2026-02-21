@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\GroupSale;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -30,8 +31,14 @@ class DatabaseSeeder extends Seeder
             AttributeSeeder::class,
 
             ProductSeeder::class,
-            ProductVariantSeeder::class,
+            ProductAttributeSeeder::class,
             ProductImageSeeder::class,
+            ProductVariantSeeder::class,
+
+            ReviewSeeder::class,
+
+            GroupSaleSeeder::class,
+            GroupSalePriceSeeder::class,
 //
 //            PriceHistorySeeder::class,
 //

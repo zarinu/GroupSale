@@ -17,6 +17,7 @@ class ProductSeeder extends Seeder
                 'en_name' => 'Samsung Galaxy s23 Mobile Phone',
                 'slug' => 'samsung-galaxy-s23',
                 'short_description' => 'پرچمدار سامسونگ',
+                'description' => 'توضیحات کامل مربوط به گوشی تلفن سامسونگ گلکسی اس ۲۳',
                 'price' => 45000000,
                 'thumbnail' => 'products/s23/main.jpg',
             ],

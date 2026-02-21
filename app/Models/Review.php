@@ -15,4 +15,9 @@ class Review extends Model
     {
         return $this->belongsTo(Product::class);
     }
+
+    public function points()
+    {
+        return $this->hasMany(ReviewPoint::class);
+    }
 }

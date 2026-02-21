@@ -29,10 +29,17 @@ return new class extends Migration
             $table->unsignedInteger('parent_id')
                 ->nullable();
 
-            $table->unsignedTinyInteger('rating'); // 1..5
+            $table->string('title')->nullable();
             $table->text('comment')->nullable();
 
+            $table->unsignedTinyInteger('rating'); // 1..5
+
             $table->boolean('is_approved')->default(false);
+
+            $table->boolean('is_recommended')->nullable();
+            $table->boolean('is_verified_purchase')->default(false);
+            $table->string('ip_address')->nullable();
+
             $table->unsignedInteger('likes')->nullable();
             $table->unsignedInteger('dislikes')->nullable();
 

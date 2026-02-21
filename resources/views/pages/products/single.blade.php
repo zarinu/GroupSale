@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'نمایش یک محصول')
+@section('title', $product->name)
 
 @section('content')
     <!-- MAIN -->
@@ -49,244 +49,261 @@
                     </div>
                     <div class="w-full lg:w-2/3 mt-5 md:mt-0">
                         <div class="opacity-80 text-lg font-semibold">
-                            {{ $product->title }}
+                            {{ $product->name }}
                         </div>
                         <div class="opacity-50 text-xs mt-2 mb-4">
-                            {{ $product->en_title }}
+                            {{ $product->en_name }}
                         </div>
                         <div class="md:flex sm:pr-7">
-                            <div class="md:w-2/3">
-                                <div class="flex items-center">
-                                    <div class="opacity-70 text-sm mb-1">
-                                        رنگ بندی:
-                                    </div>
-                                    <div class="flex flex-wrap">
-                                        <div class="flex items-center gap-x-2">
-                                            <div class="flex w-max">
-                                                <div class="inline-flex items-center">
-                                                    <label
-                                                            class="relative flex cursor-pointer items-center rounded-full p-3"
-                                                            for="pink"
-                                                    >
-                                                        <input
-                                                                id="pink"
-                                                                name="color"
-                                                                type="radio"
-                                                                class="before:content[''] peer relative h-7 w-7 cursor-pointer appearance-none rounded-full border border-blue-gray-200 bg-pink-500 text-pink-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity hover:before:opacity-10"
-                                                                checked
-                                                        />
-                                                        <div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-pink-500 opacity-0 transition-opacity peer-checked:opacity-100">
-                                                            <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    class="h-3.5 w-3.5"
-                                                                    viewBox="0 0 16 16"
-                                                                    fill="currentColor"
-                                                            >
-                                                                <circle data-name="ellipse" cx="8" cy="8" r="8"></circle>
-                                                            </svg>
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                                <div class="inline-flex items-center">
-                                                    <label
-                                                            class="relative flex cursor-pointer items-center rounded-full p-3"
-                                                            for="red"
-                                                    >
-                                                        <input
-                                                                id="red"
-                                                                name="color"
-                                                                type="radio"
-                                                                class="before:content[''] peer relative h-7 w-7 cursor-pointer appearance-none rounded-full border border-blue-gray-200 bg-red-500 text-red-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-red-500 checked:before:bg-red-500 hover:before:opacity-10"
-                                                        />
-                                                        <div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-red-500 opacity-0 transition-opacity peer-checked:opacity-100">
-                                                            <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    class="h-3.5 w-3.5"
-                                                                    viewBox="0 0 16 16"
-                                                                    fill="currentColor"
-                                                            >
-                                                                <circle data-name="ellipse" cx="8" cy="8" r="8"></circle>
-                                                            </svg>
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                                <div class="inline-flex items-center">
-                                                    <label
-                                                            class="relative flex cursor-pointer items-center rounded-full p-3"
-                                                            for="green"
-                                                    >
-                                                        <input
-                                                                id="green"
-                                                                name="color"
-                                                                type="radio"
-                                                                class="before:content[''] peer relative h-7 w-7 cursor-pointer appearance-none rounded-full border border-blue-gray-200 bg-blue-500 text-blue-500 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity checked:border-blue-500 checked:before:bg-blue-500 hover:before:opacity-10"
-                                                        />
-                                                        <div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 text-blue-500 opacity-0 transition-opacity peer-checked:opacity-100">
-                                                            <svg
-                                                                    xmlns="http://www.w3.org/2000/svg"
-                                                                    class="h-3.5 w-3.5"
-                                                                    viewBox="0 0 16 16"
-                                                                    fill="currentColor"
-                                                            >
-                                                                <circle data-name="ellipse" cx="8" cy="8" r="8"></circle>
-                                                            </svg>
-                                                        </div>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                            <div class="md:w-1/2">
                                 <div>
                                     <div class="mt-4 mb-2 opacity-80 text-sm font-semibold">
                                         ویژگی های محصول:
                                     </div>
                                     <div class="flex flex-col gap-y-2 text-xs">
-                                        <div class=" flex items-center">
-                                            <h3 class="opacity-60 ml-1">
-                                                پردازنده:
-                                            </h3>
-                                            <div class="opacity-80">
-                                                <div class="text-right">
-                                                    AM 32x new design
+                                        @foreach($product->attributeValues as $attrValue)
+                                            <div class=" flex items-center">
+                                                <h3 class="opacity-60 ml-1">
+                                                    {{ $attrValue->attribute->name }}:
+                                                </h3>
+                                                <div class="opacity-80">
+                                                    <div class="text-right">
+                                                        {{ $attrValue->value }}
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div class=" flex items-center">
-                                            <h3 class="opacity-70 ml-1">
-                                                سیستم عامل:
-                                            </h3>
-                                            <div class="opacity-80">
-                                                <div class="text-right">
-                                                    IOS
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class=" flex items-center">
-                                            <h3 class="opacity-70 ml-1">
-                                                فناوری ساخت:
-                                            </h3>
-                                            <div class="opacity-80">
-                                                <div class="text-right">
-                                                    A2C
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class=" flex items-center">
-                                            <h3 class="opacity-70 ml-1">
-                                                دوربین عقب:
-                                            </h3>
-                                            <div class="opacity-80 ">
-                                                <div class="text-right">
-                                                    64
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class=" flex items-center">
-                                            <h3 class="opacity-70 ml-1">
-                                                دوربین جلو:
-                                            </h3>
-                                            <div class="opacity-80">
-                                                <div class="text-right">
-                                                    32
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div>
-                            <div class="md:w-2/5 mt-5 md:mt-0">
+                            <div class="md:w-1/2 mt-5 md:mt-0">
                                 <div class="pb-5 rounded-2xl shadow-xl border">
-                                    <div class="flex justify-between items-start px-3 py-5">
-                                        <div class="text-right opacity-80 text-sm flex flex-col gap-y-6">
-                                            <div>
-                                                گارانتی:
-                                            </div>
-                                            <div>
-                                                موجود در انبار:
-                                            </div>
-                                            <div>
-                                                تعداد شرکت کنندگان:
-                                            </div>
-                                            <div>
-                                                تعداد:
-                                            </div>
-                                            <div>
-                                                قیمت:
-                                            </div>
-                                        </div>
-                                        <div class="text-left opacity-70 text-sm flex flex-col gap-y-6">
-                                            <div>
-                                                6 ماهه تمام
-                                            </div>
-                                            <div>
-                                                7 عدد
-                                            </div>
-                                            <div>
-                                                @if($groupSale)
-                                                    <div class="text-xs mt-3">
-                                                        {{ $participantsCount }} نفر تاکنون شرکت کرده‌اند
+                                    <div class="px-3 py-5">
+                                        <div class="border border-gray-300 rounded-xl p-4 shadow-sm bg-white">
+                                            <p class="text-center text-sm opacity-7 bg-red-100 px-2 py-2 rounded-2xl">
+                                                برای مشاهده قیمت و فروش گروهی، لطفاً مشخصات محصول را انتخاب کنید.
+                                            </p>
+
+                                            <form method="GET" action="{{ route('products.show', $product->slug) }}">
+                                                @foreach ($variantAttributeGroups as $attributeId => $attributeValues)
+                                                    @php
+                                                        $attribute = \App\Models\Attribute::find($attributeId);
+                                                    @endphp
+
+                                                    <div class="variant-attribute">
+                                                        <label for="{{ $attribute->code }}" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700">
+                                                            {{ $attribute->name }}
+                                                        </label>
+
+                                                        @if($attribute->type == 'color')
+                                                            <div class="flex items-center">
+                                                                <div class="flex flex-wrap">
+                                                                    <div class="flex items-center gap-x-2">
+                                                                        <div class="flex w-max">
+                                                                            @foreach ($attributeValues as $value)
+                                                                                <div class="inline-flex items-center">
+                                                                                    <label
+                                                                                            class="relative flex cursor-pointer items-center rounded-full p-3"
+                                                                                            for="{{ $attribute->code }}"
+                                                                                    >
+                                                                                        <input
+                                                                                                id="{{ $attribute->code }}"
+                                                                                                name="{{ $attribute->code }}"
+                                                                                                value="{{ $value->slug }}"
+                                                                                                type="radio"
+                                                                                                class="before:content[''] peer relative h-7 w-7 cursor-pointer appearance-none rounded-full border border-blue-gray-200 transition-all before:absolute before:top-2/4 before:left-2/4 before:block before:h-12 before:w-12 before:-translate-y-2/4 before:-translate-x-2/4 before:rounded-full before:bg-blue-gray-500 before:opacity-0 before:transition-opacity hover:before:opacity-10"
+                                                                                                style="background-color: {{ $value->slug }}; color: {{ $value->slug }};"
+                                                                                                {{  ((request()->query($attribute->code)) && request()->query($attribute->code) === $value->slug) ? 'checked' : '' }}
+                                                                                        />
+                                                                                        <div class="pointer-events-none absolute top-2/4 left-2/4 -translate-y-2/4 -translate-x-2/4 opacity-0 transition-opacity peer-checked:opacity-100">
+                                                                                            <svg
+                                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                                    class="h-3.5 w-3.5"
+                                                                                                    viewBox="0 0 16 16"
+                                                                                                    fill="currentColor"
+                                                                                            >
+                                                                                                <circle data-name="ellipse" cx="8" cy="8" r="8"></circle>
+                                                                                            </svg>
+                                                                                        </div>
+                                                                                    </label>
+                                                                                </div>
+                                                                            @endforeach
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        @else
+                                                            <select name="{{ $attribute->code }}" id="{{ $attribute->code }}" required class="text-sm block w-full appearance-none rounded-lg border border-gray-300 bg-white px-3 py-2 text-gray-700 outline-none transition-all">
+                                                                <option value="">انتخاب کنید</option>
+                                                                @foreach ($attributeValues as $value)
+                                                                    <option value="{{ $value->slug }}" {{  ((request()->query($attribute->code)) && request()->query($attribute->code) === $value->slug) ? 'selected' : '' }}>
+                                                                        {{ $value->value }}
+                                                                    </option>
+                                                                @endforeach
+                                                            </select>
+                                                        @endif
                                                     </div>
-                                                @endif
-                                            </div>
-                                            <div class="flex text-sm sm:text-sm items-center justify-center lg:justify-start">
-                                                <div class="flex items-center justify-center select-none">
-                                                    <div class="quantity flex items-center">
-                                                        <input class="w-12 h-7 mx-2 text-center border focus:outline-none rounded-lg" type="number" min="1" step="1" value="1" readonly>
+                                                @endforeach
+
+                                                <span class="flex justify-center items-center opacity-90 py-3">
+                                                <button type="submit" class="px-7 py-2 text-center text-black bg-gray-200 align-middle border-0 rounded-lg shadow-md text-sm">
+                                                    اعمال
+                                                </button>
+                                            </span>
+                                            </form>
+                                        </div>
+
+                                        @if($firstOrNot == 'not')
+                                            @if($variant)
+                                                <div class="my-3">
+                                                    <strong>اطلاعات نوع محصول</strong>
+                                                    <div class="flex justify-between items-start px-3 py-5">
+                                                        <div class="text-right opacity-80 text-sm flex flex-col gap-y-6">
+                                                            <div>
+                                                                sku:
+                                                            </div>
+                                                            <div>
+                                                                قیمت:
+                                                            </div>
+                                                            <div>
+                                                                موجود در انبار:
+                                                            </div>
+                                                        </div>
+                                                        <div class="text-left opacity-70 text-sm flex flex-col gap-y-6">
+                                                            <div>
+                                                                {{ $variant->sku }}
+                                                            </div>
+                                                            <div>
+                                                                {{ number_format($variant->price) }} تومان
+                                                            </div>
+                                                            <div>
+                                                                {{ $variant->stock }} عدد
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="flex text-red-500">
-                                                <div class="flex flex-col gap-y-1">
-                                                    @if($groupSale)
-                                                        <div class="flex text-xs opacity-75 line-through">
-                                                            {{ number_format($product->base_price) }}
-                                                        </div>
 
-                                                        <div class="flex text-red-500 text-lg font-bold mt-1">
-                                                            {{ number_format($currentTier?->price ?? $product->base_price) }}
-                                                        </div>
+                                                @if($groupSale)
+                                                    <hr>
+                                                    <div class="my-3">
+                                                        <strong>اطلاعات کمپین فروش گروهی</strong>
 
-                                                        <div class="text-xs opacity-70 mt-1">
-                                                            پیش‌پرداخت:
-                                                            {{ $groupSale->initial_payment_percentage }}٪
-                                                            ({{ number_format(($currentTier?->price ?? 0) * $groupSale->initial_payment_percentage / 100) }} )
+                                                        <div class="flex justify-between items-start px-3 py-5">
+                                                            <div class="text-right opacity-80 text-sm flex flex-col gap-y-6">
+                                                                <div>
+                                                                    تعداد شرکت کنندگان تا به حال:
+                                                                </div>
+                                                                <div>
+                                                                    آخرین قیمت:
+                                                                </div>
+                                                                <div>
+                                                                    مبلغ پیش پرداخت:
+                                                                </div>
+                                                            </div>
+                                                            <div class="text-left opacity-70 text-sm flex flex-col gap-y-6">
+                                                                <div>
+                                                                    {{ $groupSale->current_participants }}
+                                                                </div>
+                                                                <div>
+                                                                    {{ number_format($groupSale->current_price) }} تومان
+                                                                </div>
+                                                                <div>
+                                                                    {{ number_format(($groupSale->current_price) * $groupSale->initial_payment_percentage / 100) }}تومان
+                                                                </div>
+                                                            </div>
                                                         </div>
+                                                    </div>
+
+                                                    {{-- The Timer--}}
+                                                    @php $groupSaleEnd = $groupSale->ends_at->timestamp * 1000 @endphp
+                                                    <div class="max-w-md mx-auto mt-6 border border-gray-300 rounded-xl p-4 shadow-sm bg-white">
+                                                        <!-- عنوان تایمر -->
+                                                        <div class="text-center mb-2 text-gray-700 font-medium">
+                                                            زمان باقی‌مانده تا پایان فروش گروهی
+                                                        </div>
+                                                        <div
+                                                                id="countdown"
+                                                                data-end-time="{{ $groupSaleEnd }}"
+                                                                class="flex gap-4 justify-center items-center mt-6"
+                                                        >
+                                                            <div class="bg-gray-900 text-white rounded-xl px-4 py-3 text-center w-20">
+                                                                <div id="days" class="text-2xl font-bold">0</div>
+                                                                <div class="text-xs text-gray-300">Days</div>
+                                                            </div>
+
+                                                            <div class="bg-gray-900 text-white rounded-xl px-4 py-3 text-center w-20">
+                                                                <div id="hours" class="text-2xl font-bold">0</div>
+                                                                <div class="text-xs text-gray-300">Hours</div>
+                                                            </div>
+
+                                                            <div class="bg-gray-900 text-white rounded-xl px-4 py-3 text-center w-20">
+                                                                <div id="minutes" class="text-2xl font-bold">0</div>
+                                                                <div class="text-xs text-gray-300">Min</div>
+                                                            </div>
+
+                                                            <div class="bg-red-600 text-white rounded-xl px-4 py-3 text-center w-20">
+                                                                <div id="seconds" class="text-2xl font-bold">0</div>
+                                                                <div class="text-xs text-red-200">Sec</div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    @if(!$joined)
+                                                        <form method="POST" action="{{ route('group-sales.join', $groupSale) }}">
+                                                            @csrf
+
+                                                            {{-- تعداد --}}
+                                                            <div class="flex justify-between items-start px-3 py-5">
+                                                                <div class="text-right opacity-80 text-sm flex flex-col gap-y-6">
+                                                                    <p>انتخاب تعداد:</p>
+                                                                </div>
+                                                                <div class="text-left opacity-70 text-sm flex flex-col gap-y-6">
+                                                                    <div class="quantity flex items-center">
+                                                                        <label>
+                                                                            <input class="w-20 h-7 mx-2 text-center border focus:outline-none rounded-lg" type="number" min="1" step="1" value="1" readonly>
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                            {{-- The Price Tiers--}}
+                                                            <div class="my-2 max-w-md mx-auto bg-blue-100 rounded-xl shadow-lg p-6 text-center">
+                                                                <!-- عنوان اصلی -->
+                                                                <h2 class="text-2xl font-bold text-blue-900 mb-2">تخفیف خرید گروهی</h2>
+                                                                <p class="text-blue-800 mb-6">به تعداد بیشتر، قیمت کمتر!</p>
+
+                                                                <!-- Price Tiers -->
+                                                                <div class="space-y-4">
+                                                                    @foreach($priceTiers as $tier)
+                                                                        <div class="relative p-4 {{$tier['is_active'] ? 'bg-yellow-400' : 'bg-gray-300'}} rounded-lg">
+                                                                            <div class="text-gray-700 font-bold">{{$tier['min_buyers']}} نفر → {{number_format($tier['price'])}} تومان</div>
+                                                                        </div>
+                                                                    @endforeach
+                                                                </div>
+
+                                                                <!-- Call to Action -->
+                                                                <button type="submit" class="mt-6 px-6 py-3 bg-orange-500 text-white font-bold rounded-lg hover:bg-orange-600 transition">
+                                                                    همین حالا همراه شوید!
+                                                                </button>
+                                                            </div>
+                                                        </form>
                                                     @else
-                                                        <div class="flex text-red-500">
-                                                            {{ number_format($product->base_price) }}
+                                                        <div class="text-center text-green-600 text-sm">
+                                                            شما در این کمپین شرکت کرده‌اید
                                                         </div>
                                                     @endif
-                                                </div>
-                                                <div>
-                                                    تومان
-                                                </div>
-                                            </div>
-                                        </div>
+                                                @else
+                                                    <div class="text-center text-sm opacity-70">
+                                                        این محصول کمپین فروش فعالی ندارد
+                                                    </div>
+                                                @endif
+                                            @else
+                                                <p class="text-center text-sm opacity-70">
+                                                    نوع محصولی با این ویژگی ها یافت نشد.
+                                                </p>
+                                            @endif
+                                        @endif
                                     </div>
-
-                                    @if(!$groupSale)
-                                        <div class="text-center text-sm opacity-70">
-                                            این محصول کمپین فروش فعالی ندارد
-                                        </div>
-                                    @elseif($joined)
-                                        <div class="text-center text-green-600 text-sm">
-                                            شما در این کمپین شرکت کرده‌اید
-                                        </div>
-                                    @else
-                                        <span class="flex justify-center items-center opacity-90">
-                                            <form method="POST" action="{{ route('group-sales.join', $groupSale) }}">
-                                                @csrf
-                                                <button class="px-7 py-2 text-white bg-red-500 rounded-lg">
-                                                    شرکت در خرید گروهی
-                                                </button>
-                                            </form>
-                                        </span>
-                                    @endif
-
-                                    {{--                                    <span class="flex justify-center items-center opacity-90">--}}
-                                    {{--                    <button class="px-7 py-2 text-center text-white bg-red-500 align-middle border-0 rounded-lg shadow-md text-sm">افزودن به سبد خرید</button>--}}
-                                    {{--                  </span>--}}
                                 </div>
                             </div>
                         </div>
@@ -353,281 +370,201 @@
                 معرفی کوتاه محصول
               </span>
                             <p class="text-gray-500 text-sm leading-7 mt-3">
-                                اپل همواره توانسته است گوشی‌های هوشمند قدرتمند و بسیار باکیفیتی را روانه بازار کند و پرچمداران سری 13 هم توانستند با بهره بردن از مشخصات فنی قدرتمند، نه‌تنها به نسبت نسل قبلی یعنی خانواده iPhone12، بلکه به نسبت پرچمداران مدعی دیگر هم عملکرد بسیار درخشانی داشته باشند. iPhone 13 Pro از لحاظ مشخصات فنی در نظر گرفته شده چیزی کم از گل سرسبد این سری یعنی iPhone 13 Pro Max ندارد. در نمای روبه‌رویی این گوشی به صفحه‌نمایش با ابعاد 6.1 اینچ و رزولوشن 2532x1170 از نوع Super Retina XDR OLED مجهز شده است. صفحه‌نمایش بسیار باکیفیت که از جمله قابلیت‌های قدرتمند آن، می‌توانیم به نرخ بروزرسانی 120 هرتز و البته حداکثر روشنایی 1200 نیت (nits) اشاره کنیم. در بخش سنسور‌های دوربین هم قرارگیری سه سنسور با رزولوشن 12 مگاپیکسل به ترتیب از نوع عریض، تله‌فوتو و فوق عریض یا همان ultrawide هستیم که البته سنسور TOF 3D LiDAR هم با عملکردی مشابه با سنسورهای سنجش عمق و البته بهتر، این گوشی را همراه می‌کنند. برای دوربین سلفی هم سنسور با رزولوشن 12 مگاپیکسل در نظر گرفته شده است. در بخش فیلمبرداری هم مثل همیشه این بار اما به لطف توانایی ضبط ویدیو با نهایت کیفیت 4K و سرعت 60 فریم در ثانیه برای سنسور عریض و سلفی، این گوشی عملکرد بی‌نظیری را به شما ارائه می‌کند که کمتر پرچمداری توانایی رقابت با آن را دارد.
+                                {!! $product->short_description !!}
                             </p>
                         </div>
                         <div class="bg-gray-50 p-4 rounded-xl" id="test" role="tabpanel" aria-labelledby="test-tab">
                             <div class="flex flex-col items-start gap-y-4">
-                <span class="border-b-red-500 border-b">
-                  بررسی تخصصی محصول
-                </span>
-                                <span class="border-b-red-500 border-b text-sm">
-                  طراحی کاربر پسند
-                </span>
+                                <span class="border-b-red-500 border-b">
+                                  بررسی تخصصی محصول
+                                </span>
                             </div>
                             <div class="md:flex gap-3">
                                 <p class="text-gray-500 text-sm leading-7 mt-3">
-                                    آیفون SE 2020 به عنوان جدید‌ترین گوشی هوشمند مقرون ‌به ‌صرفه این شرکت معرفی شده بود که در قسمت‌های کناری برخلاف پرچمداران خانواده آیفون 11 که فریمی منحنی شکل داشتند، فریم تخت داشت. این طراحی یادآور طراحی‌های قدیمی‌ این شرکت بود و حس نوستالژی را به کاربر منتقل می‌کرد. برای اولین بار، از این طراحی در گوشی‌های هوشمند خانواده آیفون 12 نیز استفاده شد که استقبال بی نظیر کاربران را به همراه داشت. همین امر سبب شد تا پرچمداران خانواده آیفون 13 نیز از این طراحی نوستالژی و جذاب بهره ببرند. در نگاه اولیه شاید طراحی در نظر گرفته شده برای آیفون 13 پرو تفاوت چندانی با آیفون 12 پرو نداشته باشد، اما اپل توانست با تغییرات هرچند اندک و تنوع رنگی جدید، ظاهری به مراتب جذاب‌تر و همه پسندتر به آن بدهد.
+                                    {!! $product->description !!}
                                 </p>
-                                <img class="max-w-[320px] w-full mx-auto rounded-3xl" src="{{ asset('assets/images/product/good.jpg') }}" alt="">
+                                {{--                                <img class="max-w-[320px] w-full mx-auto rounded-3xl" src="{{ asset('assets/images/product/good.jpg') }}" alt="">--}}
                             </div>
                         </div>
                         <div class="bg-gray-50 p-4 rounded-xl hidden" id="details" role="tabpanel" aria-labelledby="details-tab">
-              <span class="border-b-red-500 border-b">
-                مشخصات فنی محصول
-              </span>
+                            <span class="border-b-red-500 border-b">
+                                مشخصات فنی محصول
+                            </span>
                             <div class="text-gray-500 text-sm grid grid-cols-1 gap-x-3 md:grid-cols-2">
-                                <div class="flex items-center justify-between bg-gray-100 p-3 w-full my-3 mx-auto rounded-xl">
-                                    <div class="text-xs opacity-80">
-                                        پردازنده:
+                                @foreach($product->attributeValues as $attrValue)
+                                    <div class="flex items-center justify-between bg-gray-100 p-3 w-full my-3 mx-auto rounded-xl">
+                                        <div class="text-xs opacity-80">
+                                            {{ $attrValue->attribute->name }}:
+                                        </div>
+                                        <div class="text-xs opacity-70">
+                                            {{ $attrValue->value }}
+                                        </div>
                                     </div>
-                                    <div class="text-xs opacity-70">
-                                        AM32x new product
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-between bg-gray-100 p-3 w-full my-3 mx-auto rounded-xl">
-                                    <div class="text-xs opacity-80">
-                                        فرکانس پردازنده:
-                                    </div>
-                                    <div class="text-xs opacity-70">
-                                        32HR
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-between bg-gray-100 p-3 w-full my-3 mx-auto rounded-xl">
-                                    <div class="text-xs opacity-80">
-                                        وزن:
-                                    </div>
-                                    <div class="text-xs opacity-70">
-                                        230 گرم
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-between bg-gray-100 p-3 w-full my-3 mx-auto rounded-xl">
-                                    <div class="text-xs opacity-80">
-                                        نسخه بلوتوث:
-                                    </div>
-                                    <div class="text-xs opacity-70">
-                                        7r
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-between bg-gray-100 p-3 w-full my-3 mx-auto rounded-xl">
-                                    <div class="text-xs opacity-80">
-                                        نسخه وای فای:
-                                    </div>
-                                    <div class="text-xs opacity-70">
-                                        3prm new test
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-between bg-gray-100 p-3 w-full my-3 mx-auto rounded-xl">
-                                    <div class="text-xs opacity-80">
-                                        سیستم عامل:
-                                    </div>
-                                    <div class="text-xs opacity-70">
-                                        IOS
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-between bg-gray-100 p-3 w-full my-3 mx-auto rounded-xl">
-                                    <div class="text-xs opacity-80">
-                                        پردازنده گرافیکی:
-                                    </div>
-                                    <div class="text-xs opacity-70">
-                                        Hiliston 7200
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-between bg-gray-100 p-3 w-full my-3 mx-auto rounded-xl">
-                                    <div class="text-xs opacity-80">
-                                        دوربین جلو:
-                                    </div>
-                                    <div class="text-xs opacity-70">
-                                        12 MP
-                                    </div>
-                                </div>
-                                <div class="flex items-center justify-between bg-gray-100 p-3 w-full my-3 mx-auto rounded-xl">
-                                    <div class="text-xs opacity-80">
-                                        دوربین عقب:
-                                    </div>
-                                    <div class="text-xs opacity-70">
-                                        24MP
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                         <div class="bg-gray-50 p-4 rounded-xl hidden" id="commentsBuy" role="tabpanel" aria-labelledby="commentsBuy-tab">
               <span class="border-b-red-500 border-b">
                 دیدگاه های محصول
               </span>
-                            <p class="text-gray-500 text-sm">
-                            <div class="flex flex-col py-4 px-4 mx-auto my-6 max-w-7xl rounded-2xl bg-white">
-                                <!-- UO COMMENTS -->
-                                <div>
-                                    <div>دیدگاه ها</div>
-                                    <div class="opacity-70 text-xs">1 دیدگاه</div>
-                                </div>
-                                <!-- COMMENT -->
-                                <div class="bg-gray-50 rounded-xl px-3 sm:px-5 py-3 my-2">
-                                    <div class="flex flex-col items-stat gap-y-2">
-                                        <div class="flex items-center">
-                                            <div class="text-green-400 bg-green-100 px-1 rounded-md text-sm">
-                                                4.7
-                                            </div>
-                                            <div class="text-xs opacity-60 pr-1">
-                                                ارسال شده توسط امیررضا کریمی
-                                            </div>
-                                            <div class="text-xs opacity-60 pr-1">
-                                                1402/05/12
-                                            </div>
-                                        </div>
-                                        <span class="text-green-400 bg-green-100 px-1 w-24 rounded-md text-sm text-center">
-                        پیشنهاد شده
-                      </span>
-                                    </div>
+                            <div class="text-gray-500 text-sm">
+                                <div class="flex flex-col py-4 px-4 mx-auto my-6 max-w-7xl rounded-2xl bg-white">
+                                    <!-- UO COMMENTS -->
                                     <div>
-                                        <div class="opacity-60 text-sm py-3">
-                                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.
-                                        </div>
-                                        <div class="flex flex-col gap-y-2">
-                                            <div class="flex text-green-400 text-xs">
-                                                <div>
-                                                    +
+                                        <div>دیدگاه ها</div>
+                                        <div class="opacity-70 text-xs">{{count($product->reviews)}} دیدگاه</div>
+                                    </div>
+                                    @foreach($product->reviews as $review)
+                                        <!-- COMMENT -->
+                                        <div class="bg-gray-50 rounded-xl px-3 sm:px-5 py-3 my-2">
+                                            <div class="flex flex-col items-stat gap-y-2">
+                                                <div class="flex items-center">
+                                                    <div class="text-green-400 bg-green-100 px-1 rounded-md text-sm">
+                                                        {{$review->rating}}
+                                                    </div>
+                                                    <div class="text-xs opacity-60 pr-1">
+                                                        ارسال شده توسط {{$review->name}}
+                                                    </div>
+                                                    <div class="text-xs opacity-60 pr-1">
+                                                        {{$review->created_at}}
+                                                    </div>
                                                 </div>
-                                                <div>
-                                                    طراحی زیبا
-                                                </div>
+                                                <span class="text-{{$review->is_recommended ? 'green' : 'red'}}-400 bg-{{$review->is_recommended ? 'green' : 'red'}}-100 px-1 w-24 rounded-md text-sm text-center">
+                                                    {{$review->is_recommended ? 'پیشنهاد شده' : 'پیشنهاد نشده'}}
+                                                </span>
                                             </div>
-                                            <div class="flex text-green-400 text-xs">
-                                                <div>
-                                                    +
-                                                </div>
-                                                <div>
-                                                    خوش دستی
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="flex flex-col gap-y-2 mt-2">
-                                            <div class="flex text-red-400 text-xs">
-                                                <div>
-                                                    -
-                                                </div>
-                                                <div>
-                                                    وزن زیاد
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="flex gap-x-4 justify-end">
-                                        <a href="" class="flex">
-                                            <span>5</span>
-                                            <svg class="hover:fill-green-600" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#797979" viewBox="0 0 256 256">
-                                                <path d="M232.49,81.44A22,22,0,0,0,216,74H158V56a38,38,0,0,0-38-38,6,6,0,0,0-5.37,3.32L76.29,98H32a14,14,0,0,0-14,14v88a14,14,0,0,0,14,14H204a22,22,0,0,0,21.83-19.27l12-96A22,22,0,0,0,232.49,81.44ZM30,200V112a2,2,0,0,1,2-2H74v92H32A2,2,0,0,1,30,200ZM225.92,97.24l-12,96A10,10,0,0,1,204,202H86V105.42l37.58-75.17A26,26,0,0,1,146,56V80a6,6,0,0,0,6,6h64a10,10,0,0,1,9.92,11.24Z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                        <a href="" class="flex">
-                                            <span>1</span>
-                                            <svg class="hover:fill-red-600" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#797979" viewBox="0 0 256 256">
-                                                <path d="M237.83,157.27l-12-96A22,22,0,0,0,204,42H32A14,14,0,0,0,18,56v88a14,14,0,0,0,14,14H76.29l38.34,76.68A6,6,0,0,0,120,238a38,38,0,0,0,38-38V182h58a22,22,0,0,0,21.83-24.73ZM74,146H32a2,2,0,0,1-2-2V56a2,2,0,0,1,2-2H74Zm149.5,20.62A9.89,9.89,0,0,1,216,170H152a6,6,0,0,0-6,6v24a26,26,0,0,1-22.42,25.75L86,150.58V54H204a10,10,0,0,1,9.92,8.76l12,96A9.89,9.89,0,0,1,223.5,166.62Z">
-                                                </path>
-                                            </svg>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            </p>
-                        </div>
-                        <div class="bg-gray-50 p-4 rounded-xl hidden" id="comments" role="tabpanel" aria-labelledby="comments-tab">
-              <span class="border-b-red-500 border-b">
-                پرسش های محصول
-              </span>
-                            <p class="text-gray-500 text-sm">
-                            <div class="flex flex-col py-4 px-4 mx-auto my-6 max-w-7xl rounded-2xl bg-white">
-                                <!-- UO COMMENTS -->
-                                <div>
-                                    <div>نظرات</div>
-                                    <div class="pr-5 opacity-70 text-xs">2نظر</div>
-                                </div>
-                                <!-- COMMENT -->
-                                <div class="bg-gray-50 rounded-xl px-5 py-3 my-2">
-                                    <div class="flex items-center">
-                                        <div>
-                                            <img class="w-10" src="{{ asset('assets/images/others/userNotImage.png') }}" alt="">
-                                        </div>
-                                        <div class="text-sm opacity-60 pr-1">
-                                            نوشته شده توسط امیررضا کریمی
-                                        </div>
-                                    </div>
-                                    <div class="opacity-60 text-sm py-3">
-                                        لورم است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.
-                                    </div>
-                                    <div>
-                                        <button class="mr-auto px-2 sm:px-4 py-2 opacity-80 md:w-auto text-xs sm:text-sm xl:text-base flex justify-center items-center">
-                                            پاسخ
-                                        </button>
-                                    </div>
-                                    <!-- RESPONSE -->
-                                    <div class="bg-gray-100 rounded-xl pl-2 pr-5 sm:pr-8 py-3">
-                                        <div class="flex items-center">
                                             <div>
-                                                <img class="w-10" src="{{ asset('assets/images/others/userNotImage.png') }}" alt="">
+                                                <div class="opacity-60 text-sm py-3">
+                                                    {{$review->comment}}
+                                                </div>
+                                                <div class="flex flex-col gap-y-2">
+                                                    @foreach($review->points as $point)
+                                                        <div class="flex text-{{$point->is_positive ? 'green' : 'red'}}-400 text-xs">
+                                                            <div>
+                                                                {{$point->is_positive ? '+' : '-'}}
+                                                            </div>
+                                                            <div>
+                                                                {{$point->title}}
+                                                            </div>
+                                                        </div>
+                                                    @endforeach
+                                                </div>
                                             </div>
-                                            <div class="text-sm opacity-60 pr-1">
-                                                پاسخ داده شده توسط امیررضا کریمی
+                                            <div class="flex gap-x-4 justify-end">
+                                                <a href="" class="flex">
+                                                    <span>{{$review->likes}}</span>
+                                                    <svg class="hover:fill-green-600" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#797979" viewBox="0 0 256 256">
+                                                        <path d="M232.49,81.44A22,22,0,0,0,216,74H158V56a38,38,0,0,0-38-38,6,6,0,0,0-5.37,3.32L76.29,98H32a14,14,0,0,0-14,14v88a14,14,0,0,0,14,14H204a22,22,0,0,0,21.83-19.27l12-96A22,22,0,0,0,232.49,81.44ZM30,200V112a2,2,0,0,1,2-2H74v92H32A2,2,0,0,1,30,200ZM225.92,97.24l-12,96A10,10,0,0,1,204,202H86V105.42l37.58-75.17A26,26,0,0,1,146,56V80a6,6,0,0,0,6,6h64a10,10,0,0,1,9.92,11.24Z">
+                                                        </path>
+                                                    </svg>
+                                                </a>
+                                                <a href="" class="flex">
+                                                    <span>{{$review->dislikes}}</span>
+                                                    <svg class="hover:fill-red-600" xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#797979" viewBox="0 0 256 256">
+                                                        <path d="M237.83,157.27l-12-96A22,22,0,0,0,204,42H32A14,14,0,0,0,18,56v88a14,14,0,0,0,14,14H76.29l38.34,76.68A6,6,0,0,0,120,238a38,38,0,0,0,38-38V182h58a22,22,0,0,0,21.83-24.73ZM74,146H32a2,2,0,0,1-2-2V56a2,2,0,0,1,2-2H74Zm149.5,20.62A9.89,9.89,0,0,1,216,170H152a6,6,0,0,0-6,6v24a26,26,0,0,1-22.42,25.75L86,150.58V54H204a10,10,0,0,1,9.92,8.76l12,96A9.89,9.89,0,0,1,223.5,166.62Z">
+                                                        </path>
+                                                    </svg>
+                                                </a>
                                             </div>
                                         </div>
-                                        <div class="opacity-60 text-sm py-3">
-                                            لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحامه و مجله در ستون و سطرآنچنان که لازم است.
-                                        </div>
-                                        <div>
-                                            <button class="mr-auto px-2 sm:px-4 py-2 opacity-80 md:w-auto text-xs sm:text-sm xl:text-base flex justify-center items-center">
-                                                پاسخ
-                                            </button>
-                                        </div>
-                                    </div>
+                                    @endforeach
+                                    <a src="/home">ثبت نظر</a>
                                 </div>
-                                <div class="bg-gray-50 rounded-xl px-5 py-3 my-2">
-                                    <div class="flex items-center">
-                                        <div>
-                                            <img class="w-10" src="{{ asset('assets/images/others/userNotImage.png') }}" alt="">
-                                        </div>
-                                        <div class="text-sm opacity-60 pr-1">
-                                            نوشته شده توسط امیررضا کریمی
-                                        </div>
-                                    </div>
-                                    <div class="opacity-60 text-sm py-3">
-                                        لورم ایپسوم متن ساختگی با تولید سادگی نامفهو است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.
-                                    </div>
-                                    <div>
-                                        <button class="mr-auto px-2 sm:px-4 py-2 opacity-80 md:w-auto text-xs sm:text-sm xl:text-base flex justify-center items-center">
-                                            پاسخ
-                                        </button>
-                                    </div>
-                                </div>
-                                <!-- BOX SENT COMMENT -->
-                                <div>
-                                    <div class="mb-4">
-                                        <label for="username" class="inline-block mb-2 ml-1 font-semibold text-xs text-slate-700">نام شما:</label>
-                                        <input type="text" class="text-sm block w-full rounded-lg border border-gray-400 bg-white px-3 py-2 font-normal text-gray-700 outline-none focus:border-red-300"/>
-                                    </div>
-                                </div>
-                                <div class="mb-4">
-                                    <label for="mailTicket" class="inline-block mb-2 ml-1 font-semibold text-xs text-slate-700">نظر شما:</label>
-                                    <textarea cols="30" rows="5" class="text-sm block w-full rounded-lg border border-gray-400 bg-white px-3 py-2 font-normal text-gray-700 outline-none focus:border-red-300"></textarea>
-                                </div>
-                                <button class="inline-block px-8 py-2 ml-auto font-semibold text-center text-white bg-red-500 rounded-lg shadow-md text-xs">ارسال نظر</button>
                             </div>
-                            </p>
+                            <div class="bg-gray-50 p-4 rounded-xl hidden" id="comments" role="tabpanel" aria-labelledby="comments-tab">
+                              <span class="border-b-red-500 border-b">
+                                پرسش های محصول
+                              </span>
+                                <div class="text-gray-500 text-sm">
+                                    <div class="flex flex-col py-4 px-4 mx-auto my-6 max-w-7xl rounded-2xl bg-white">
+                                        <!-- UO COMMENTS -->
+                                        <div>
+                                            <div>نظرات</div>
+                                            <div class="pr-5 opacity-70 text-xs">2نظر</div>
+                                        </div>
+                                        <!-- COMMENT -->
+                                        <div class="bg-gray-50 rounded-xl px-5 py-3 my-2">
+                                            <div class="flex items-center">
+                                                <div>
+                                                    <img class="w-10" src="{{ asset('assets/images/others/userNotImage.png') }}" alt="">
+                                                </div>
+                                                <div class="text-sm opacity-60 pr-1">
+                                                    نوشته شده توسط امیررضا کریمی
+                                                </div>
+                                            </div>
+                                            <div class="opacity-60 text-sm py-3">
+                                                لورم است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.
+                                            </div>
+                                            <div>
+                                                <button class="mr-auto px-2 sm:px-4 py-2 opacity-80 md:w-auto text-xs sm:text-sm xl:text-base flex justify-center items-center">
+                                                    پاسخ
+                                                </button>
+                                            </div>
+                                            <!-- RESPONSE -->
+                                            <div class="bg-gray-100 rounded-xl pl-2 pr-5 sm:pr-8 py-3">
+                                                <div class="flex items-center">
+                                                    <div>
+                                                        <img class="w-10" src="{{ asset('assets/images/others/userNotImage.png') }}" alt="">
+                                                    </div>
+                                                    <div class="text-sm opacity-60 pr-1">
+                                                        پاسخ داده شده توسط امیررضا کریمی
+                                                    </div>
+                                                </div>
+                                                <div class="opacity-60 text-sm py-3">
+                                                    لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحامه و مجله در ستون و سطرآنچنان که لازم است.
+                                                </div>
+                                                <div>
+                                                    <button class="mr-auto px-2 sm:px-4 py-2 opacity-80 md:w-auto text-xs sm:text-sm xl:text-base flex justify-center items-center">
+                                                        پاسخ
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="bg-gray-50 rounded-xl px-5 py-3 my-2">
+                                            <div class="flex items-center">
+                                                <div>
+                                                    <img class="w-10" src="{{ asset('assets/images/others/userNotImage.png') }}" alt="">
+                                                </div>
+                                                <div class="text-sm opacity-60 pr-1">
+                                                    نوشته شده توسط امیررضا کریمی
+                                                </div>
+                                            </div>
+                                            <div class="opacity-60 text-sm py-3">
+                                                لورم ایپسوم متن ساختگی با تولید سادگی نامفهو است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است.
+                                            </div>
+                                            <div>
+                                                <button class="mr-auto px-2 sm:px-4 py-2 opacity-80 md:w-auto text-xs sm:text-sm xl:text-base flex justify-center items-center">
+                                                    پاسخ
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <!-- BOX SENT COMMENT -->
+                                        <div>
+                                            <div class="mb-4">
+                                                <label for="username" class="inline-block mb-2 ml-1 font-semibold text-xs text-slate-700">نام شما:</label>
+                                                <input type="text" class="text-sm block w-full rounded-lg border border-gray-400 bg-white px-3 py-2 font-normal text-gray-700 outline-none focus:border-red-300"/>
+                                            </div>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label for="mailTicket" class="inline-block mb-2 ml-1 font-semibold text-xs text-slate-700">نظر شما:</label>
+                                            <textarea cols="30" rows="5" class="text-sm block w-full rounded-lg border border-gray-400 bg-white px-3 py-2 font-normal text-gray-700 outline-none focus:border-red-300"></textarea>
+                                        </div>
+                                        <button class="inline-block px-8 py-2 ml-auto font-semibold text-center text-white bg-red-500 rounded-lg shadow-md text-xs">ارسال نظر</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <!-- SLIDER -->
-                <div class="bg-white rounded-2xl pt-10">
-                    <!-- TOP SLIDER -->
-                    <div class="flex justify-between px-5 md:px-10 items-center">
-                        <div class="border-b-2 border-red-500 pb-1">مرتبط ترین ها</div>
-                        <a href="#"><div class="transition px-4 py-2 rounded-xl flex justify-center items-center text-red-500 hover:text-red-600">دیدن همه<img class="w-4" src="{{ asset('assets/images/others/arrow-left.png') }}" alt=""></div></a>
-                    </div>
-                    <!-- SLIDER -->
-                    <div class="containerPSlider swiper">
-                        <div class="slide-container1 px-2">
-                            <div class="card-wrapper swiper-wrapper py-4">
+                        <!-- SLIDER -->
+                        <div class="bg-white rounded-2xl pt-10">
+                            <!-- TOP SLIDER -->
+                            <div class="flex justify-between px-5 md:px-10 items-center">
+                                <div class="border-b-2 border-red-500 pb-1">مرتبط ترین ها</div>
+                                <a href="#"><div class="transition px-4 py-2 rounded-xl flex justify-center items-center text-red-500 hover:text-red-600">دیدن همه<img class="w-4" src="{{ asset('assets/images/others/arrow-left.png') }}" alt=""></div></a>
+                            </div>
+                            <!-- SLIDER -->
+                            <div class="containerPSlider swiper">
+                                <div class="slide-container1 px-2">
+                                    <div class="card-wrapper swiper-wrapper py-4">
                 <span class="card swiper-slide my-2 p-2 md:p-3 ">
                   <div class="image-box mb-6 ">
                     <a href="">
@@ -650,7 +587,7 @@
                     </div>
                   </div>
                 </span>
-                                <span class="card swiper-slide my-2 p-2 md:p-3 ">
+                                        <span class="card swiper-slide my-2 p-2 md:p-3 ">
                   <div class="image-box mb-6 ">
                     <a href="">
                       <img class="hover:scale-105 transition rounded-3xl w-full mx-auto" src="{{ asset('assets/images/productSlider/2.jpg') }}" alt="" />
@@ -672,7 +609,7 @@
                     </div>
                   </div>
                 </span>
-                                <span class="card swiper-slide my-2 p-2 md:p-3 ">
+                                        <span class="card swiper-slide my-2 p-2 md:p-3 ">
                   <div class="image-box mb-6 ">
                     <a href="">
                       <img class="hover:scale-105 transition rounded-3xl w-full mx-auto" src="{{ asset('assets/images/productSlider/3.jpg') }}" alt="" />
@@ -694,7 +631,7 @@
                     </div>
                   </div>
                 </span>
-                                <span class="card swiper-slide my-2 p-2 md:p-3 ">
+                                        <span class="card swiper-slide my-2 p-2 md:p-3 ">
                   <div class="image-box mb-6 ">
                     <a href="">
                       <img class="hover:scale-105 transition rounded-3xl w-full mx-auto" src="{{ asset('assets/images/productSlider/4.jpg') }}" alt="" />
@@ -716,7 +653,7 @@
                     </div>
                   </div>
                 </span>
-                                <span class="card swiper-slide my-2 p-2 md:p-3 ">
+                                        <span class="card swiper-slide my-2 p-2 md:p-3 ">
                   <div class="image-box mb-6 ">
                     <a href="">
                       <img class="hover:scale-105 transition rounded-3xl w-full mx-auto" src="{{ asset('assets/images/productSlider/5.jpg') }}" alt="" />
@@ -738,7 +675,7 @@
                     </div>
                   </div>
                 </span>
-                                <span class="card swiper-slide my-2 p-2 md:p-3 ">
+                                        <span class="card swiper-slide my-2 p-2 md:p-3 ">
                   <div class="image-box mb-6 ">
                     <a href="">
                       <img class="hover:scale-105 transition rounded-3xl w-full mx-auto" src="{{ asset('assets/images/productSlider/6.jpg') }}" alt="" />
@@ -760,10 +697,12 @@
                     </div>
                   </div>
                 </span>
+                                    </div>
+                                </div>
+                                <div class="swiper-button-next swiper-navBtn"></div>
+                                <div class="swiper-button-prev swiper-navBtn"></div>
                             </div>
                         </div>
-                        <div class="swiper-button-next swiper-navBtn"></div>
-                        <div class="swiper-button-prev swiper-navBtn"></div>
                     </div>
                 </div>
             </div>
@@ -794,4 +733,43 @@
     <!-- INPUTS ADD NUMBER -->
     <script src="{{ asset('assets/js/jquery.min.js') }}"></script>
     <script src="{{ asset('assets/js/main.js') }}"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const countdownEl = document.getElementById('countdown');
+            const endTime = parseInt(countdownEl.dataset.endTime);
+
+            const daysEl = document.getElementById('days');
+            const hoursEl = document.getElementById('hours');
+            const minutesEl = document.getElementById('minutes');
+            const secondsEl = document.getElementById('seconds');
+
+            const updateCountdown = () => {
+                const now = new Date().getTime();
+                const distance = endTime - now;
+
+                if (distance <= 0) {
+                    daysEl.textContent = 0;
+                    hoursEl.textContent = 0;
+                    minutesEl.textContent = 0;
+                    secondsEl.textContent = 0;
+                    return;
+                }
+
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                daysEl.textContent = days;
+                hoursEl.textContent = hours;
+                minutesEl.textContent = minutes;
+                secondsEl.textContent = seconds;
+            };
+
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        });
+    </script>
+
 @endpush

@@ -12,14 +12,13 @@ class GroupSale extends Model
         'current_price', 'final_price'
     ];
 
+    protected $casts = [
+        'ends_at' => 'datetime',
+    ];
+
     public function product()
     {
         return $this->belongsTo(Product::class);
-    }
-
-    public function orders()
-    {
-        return $this->hasMany(GroupSaleOrder::class);
     }
 
     public function productVariant()
@@ -29,7 +28,7 @@ class GroupSale extends Model
 
     public function participants()
     {
-        return $this->hasMany(GroupSaleParticipant::class)->orderByDesc('min_buyers');
+        return $this->hasMany(GroupSaleParticipant::class);
     }
 
     public function priceTiers()

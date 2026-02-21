@@ -2,28 +2,28 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\ProductVariant;
 use Illuminate\Database\Seeder;
 use App\Models\GroupSale;
-use App\Models\Product;
 use Carbon\Carbon;
 
 class GroupSaleSeeder extends Seeder
 {
     public function run(): void
     {
-        $products = Product::all();
+        $products_variant_id = [4];
 
-        foreach ($products as $product) {
-            GroupSale::create([
-                'product_id' => $product->id,
-                'start_time' => Carbon::now(),
-                'end_time' => Carbon::now()->addDays(3),
-                'status' => 'active',
-                'min_participants' => 1,
-                'max_participants' => 50,
-                'current_price' => $product->base_price,
-            ]);
+        foreach ($products_variant_id as $id) {
+            $variant = ProductVariant::find($id);
+            GroupSale::updateOrCreate(
+                ['product_variant_id' => $id],
+                [
+                    'starts_at' => Carbon::now(),
+                    'ends_at' => Carbon::now()->addDays(30),
+                    'status' => 'active',
+                    'current_price' => $variant->price,
+                ],
+            );
         }
     }
 }

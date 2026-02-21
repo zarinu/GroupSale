@@ -68,6 +68,51 @@ class AttributeSeeder extends Seeder
                     ['value' => '۱۸ ماهه', 'slug' => '18-months'],
                 ],
             ],
+            [
+                'name' => 'پردازنده',
+                'code' => 'processor',
+                'type' => 'text',
+                'is_filterable' => false,
+                'values' => [
+                    ['value' => 'AM 32x new design', 'slug' => 'AM 32x new design'],
+                ],
+            ],
+            [
+                'name' => 'سیستم عامل',
+                'code' => 'os',
+                'type' => 'text',
+                'is_filterable' => false,
+                'values' => [
+                    ['value' => 'IOS', 'slug' => 'IOS'],
+                ],
+            ],
+            [
+                'name' => 'فناوری ساخت',
+                'code' => 'construction-technology',
+                'type' => 'text',
+                'is_filterable' => false,
+                'values' => [
+                    ['value' => 'A2C', 'slug' => 'A2C'],
+                ],
+            ],
+            [
+                'name' => 'دوربین عقب',
+                'code' => 'back-camera',
+                'type' => 'text',
+                'is_filterable' => false,
+                'values' => [
+                    ['value' => '64GB', 'slug' => '64GB'],
+                ],
+            ],
+            [
+                'name' => 'دوربین جلو',
+                'code' => 'front-camera',
+                'type' => 'text',
+                'is_filterable' => false,
+                'values' => [
+                    ['value' => '32GB', 'slug' => '32GB'],
+                ],
+            ],
         ];
 
         foreach ($attributes as $attr) {
