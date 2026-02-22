@@ -10,8 +10,8 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('/assets/admin/plugins/font-awesome/css/font-awesome.min.css') }}">
     <!-- Ionicons -->
-{{--    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">--}}
-    <link rel="stylesheet" href="{{ asset('/assets/admin/downloaded/ionicons.min.css') }}">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+{{--    <link rel="stylesheet" href="{{ asset('/assets/admin/downloaded/ionicons.min.css') }}">--}}
     <!-- Morris chart -->
     <link rel="stylesheet" href="{{ asset('/assets/admin/plugins/morris/morris.css') }}">
     <!-- Theme style -->
@@ -60,7 +60,7 @@
     </div>
 
     <footer class="main-footer">
-        <strong>حقوق محفوظ است. &copy; 2023 <a href="http://github.com/zarinu/">زهرا حیدری</a></strong>
+        <strong>حقوق محفوظ است. &copy; 2026 <a href="http://github.com/zarinu/">زهرا حیدری</a></strong>
     </footer>
 
     <aside class="control-sidebar control-sidebar-dark">
@@ -73,7 +73,7 @@
 <script src="{{ asset('/assets/admin/plugins/jquery/jquery.min.js') }}"></script>
 <!-- jQuery UI 1.11.4 -->
 {{--<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>--}}
-<link rel="stylesheet" href="{{ asset('/assets/admin/downloaded/jquery-ui.min.js') }}">
+<script src="{{ asset('/assets/admin/downloaded/jquery-ui.min.js') }}"></script>
 <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 <script>
     $.widget.bridge('uibutton', $.ui.button)
@@ -82,7 +82,7 @@
 <script src="{{ asset('/assets/admin/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 <!-- Morris.js charts -->
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>--}}
-<link rel="stylesheet" href="{{ asset('/assets/admin/downloaded/raphael-min.js') }}">
+<script src="{{ asset('/assets/admin/downloaded/raphael-min.js') }}"></script>
 <script src="{{ asset('/assets/admin/plugins/morris/morris.min.js') }}"></script>
 <!-- Sparkline -->
 <script src="{{ asset('/assets/admin/plugins/sparkline/jquery.sparkline.min.js') }}"></script>
@@ -93,7 +93,7 @@
 <script src="{{ asset('/assets/admin/plugins/knob/jquery.knob.js') }}"></script>
 <!-- daterangepicker -->
 {{--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js"></script>--}}
-<link rel="stylesheet" href="{{ asset('/assets/admin/downloaded/moment.min.js') }}">
+<script src="{{ asset('/assets/admin/downloaded/moment.min.js') }}"></script>
 
 <script src="{{ asset('/assets/admin/plugins/daterangepicker/daterangepicker.js') }}"></script>
 <!-- datepicker -->
@@ -106,13 +106,11 @@
 <script src="{{ asset('/assets/admin/plugins/fastclick/fastclick.js') }}"></script>
 <!-- AdminLTE App -->
 <script src="{{ asset('/assets/admin/dist/js/adminlte.js') }}"></script>
-<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-<script src="{{ asset('/assets/admin/dist/js/pages/dashboard.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('/assets/admin/dist/js/demo.js') }}"></script>
 
 {{--<script src="https://cdn.datatables.net/v/dt/dt-1.13.8/datatables.min.js"></script>--}}
-<link rel="stylesheet" href="{{ asset('/assets/admin/downloaded/datatables.min.js') }}">
+<script src="{{ asset('/assets/admin/downloaded/datatables.min.js') }}"></script>
 
 @stack('scripts')
 </body>

@@ -2,8 +2,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="/" class="brand-link">
-        <img src="/assets/images/admin_logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
-             style="opacity: .8">
+{{--        <img src="/assets/images/admin_logo.jpg" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">--}}
         <span class="brand-text font-weight-light">پنل مدیریت</span>
     </a>
 
@@ -14,7 +13,7 @@
             <div class="user-panel mt-3 pb-3 mb-3 d-flex">
                 <a class="nav-link" data-widget="pushmenu" href="#"><i class="fa fa-bars"></i></a>
                 <div class="image">
-                    <img src="/assets/images/hanie_heydari.png" class="img-circle elevation-2" alt="User Image">
+                    <img src="{{ asset('assets/images/logo/3.jpeg') }}" class="img-circle elevation-2" alt="User Image">
                 </div>
                 <div class="info">
                     <a href="#" class="d-block">{{auth()->user()->name}}</a>

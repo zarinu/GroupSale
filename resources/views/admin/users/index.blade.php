@@ -13,6 +13,8 @@
                             <th> شناسه </th>
                             <th> نام </th>
                             <th> موبایل </th>
+                            <th> ایمیل </th>
+                            <th> وضعیت </th>
                             <th> تاریخ ثبت </th>
                             <th> عملیات </th>
                         </tr>
@@ -32,11 +34,13 @@
             $('#empTable').DataTable({
                 processing: true,
                 serverSide: true,
-                ajax: "{{ route('users.grid') }}",
+                ajax: "{{ route('admin.users.grid') }}",
                 columns: [
                     { data: 'id' },
                     { data: 'name' },
                     { data: 'mobile' },
+                    { data: 'email' },
+                    { data: 'status' },
                     { data: 'created_at' },
                     { data: 'action', orderable:false },
                 ],
@@ -45,6 +49,5 @@
                 },
             });
         });
-
     </script>
 @endpush

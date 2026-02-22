@@ -6,9 +6,11 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "ext-curl": "*",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
-      "ext-curl": "*"
+        "morilog/jalali": "^3.5",
+        "yajra/laravel-datatables-oracle": "^11.1"
     },
     "require-dev": {
         "beyondcode/laravel-er-diagram-generator": "^5.0",

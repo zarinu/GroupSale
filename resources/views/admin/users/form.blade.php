@@ -43,6 +43,34 @@
 
                             <div class="col-sm-4">
                                 <div class="form-group">
+                                    <label for="email" class="control-label mr-2">ایمیل</label>
+
+                                    <input type="text" class="form-control @error('email') is-invalid @enderror" id="email" name="email"
+                                           placeholder="ایمیل را وارد کنید" value="{{old('email', !empty($user) ? $user->email : null)}}">
+                                </div>
+
+                                @error('email')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="status" class="control-label mr-2">وضعیت کاربر</label>
+                                    <select class="form-control @error('status') is-invalid @enderror" id="status" name="status">
+                                        <option disabled selected>انتخاب کنید</option>
+                                        @foreach(\App\Models\User::$statuses as $key => $value)
+                                            <option {{old('status', !empty($user) ? $user->status : null) == $key ? 'selected' : ''}} value="{{$key}}">{{$value}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                @error('status')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <div class="col-sm-4">
+                                <div class="form-group">
                                     <label for="password" class="control-label mr-2">پسورد</label>
 
                                     <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password"

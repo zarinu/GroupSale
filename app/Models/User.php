@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Morilog\Jalali\Jalalian;
 
 class User extends Authenticatable
 {
@@ -19,8 +20,26 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'mobile',
         'email',
+        'status',
         'password',
+    ];
+
+    public static array $statuses = [
+        'active'    => 'فعال',
+        'inactive'  => 'غیرفعال',
+        'suspended' => 'تعلیق‌شده',
+        'banned'    => 'مسدودشده',
+//        'deleted'   => 'حذف‌شده',
+    ];
+
+    public static array $statusesLabels = [
+        'active'    => 'badge badge-success',
+        'inactive'  => 'badge badge-secondary',
+        'suspended' => 'badge badge-warning',
+        'banned'    => 'badge badge-danger',
+//        'deleted'   => 'badge badge-dark',
     ];
 
     /**
@@ -50,6 +69,12 @@ class User extends Authenticatable
 //    {
 //        return $this->hasMany(GroupSaleOrder::class);
 //    }
+
+    public function getCreatedAtFaAttribute()
+    {
+//        return Jalalian::fromDateTime($this->created_at)->format('Y/m/d');
+        return Jalalian::fromDateTime($this->created_at)->format('%d %B %Y');
+    }
 
     public function roles()
     {
@@ -86,4 +111,11 @@ class User extends Authenticatable
         return $this->hasMany(Notification::class);
     }
 
+    protected static function booted()
+    {
+        static::deleting(function ($user) {
+            $user->status = 'deleted';
+            $user->save();
+        });
+    }
 }
