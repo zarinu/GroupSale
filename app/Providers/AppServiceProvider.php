@@ -22,7 +22,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         View::composer('layouts.partials.header', function ($view) {
-            $view->with('categories', Category::tree());
+            $view->with('categories', Category::tree()->get());
         });
     }
 }

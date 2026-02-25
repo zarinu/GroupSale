@@ -8,12 +8,16 @@ class Category extends Model
 {
     protected $fillable = ['name', 'slug', 'sort_order', 'parent_id'];
 
-    public static function tree()
+    public function scopeTree($query)
     {
-        return Category::where('is_active', 1)
+        return $query->where('is_active', 1)
             ->whereNull('parent_id')
-            ->with('children')
-            ->get();
+            ->with('childrenRecursive');
+    }
+
+    public function childrenRecursive()
+    {
+        return $this->children()->with('childrenRecursive');
     }
 
     public function products()

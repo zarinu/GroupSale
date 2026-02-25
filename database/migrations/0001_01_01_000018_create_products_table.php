@@ -25,7 +25,7 @@ return new class extends Migration
             $table->text('short_description')->nullable();
             $table->longText('description')->nullable();
 
-            $table->string('thumbnail')->nullable();
+            $table->boolean('has_thumbnail')->nullable();
 
             $table->boolean('is_group_buy')->default(false);
             $table->boolean('is_active')->default(true);

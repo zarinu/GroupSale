@@ -59,21 +59,21 @@
                         <a href="#" class="nav-link">
                             <i class="nav-icon fa fa-laptop"></i>
                             <p>
-                                دوره ها
+                                محصولات
                                 <i class="right fa fa-angle-left"></i>
                             </p>
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
-                                <a href="/admin/courses" class="nav-link {{$sidebar_item == 'courses' ? 'active' : ''}}">
+                                <a href="/admin/products" class="nav-link {{$sidebar_item == 'products' ? 'active' : ''}}">
                                     <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>لیست دوره ها</p>
+                                    <p>لیست محصولات</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="/admin/courses/create" class="nav-link {{$sidebar_item == 'courses_create' ? 'active' : ''}}">
+                                <a href="/admin/products/create" class="nav-link {{$sidebar_item == 'products_create' ? 'active' : ''}}">
                                     <i class="fa fa-circle-o nav-icon"></i>
-                                    <p>ایجاد دوره جدید</p>
+                                    <p>ایجاد محصول جدید</p>
                                 </a>
                             </li>
                         </ul>

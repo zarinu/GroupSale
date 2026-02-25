@@ -32,7 +32,7 @@ class DatabaseSeeder extends Seeder
 
             ProductSeeder::class,
             ProductAttributeSeeder::class,
-            ProductImageSeeder::class,
+//            ProductImageSeeder::class,
             ProductVariantSeeder::class,
 
             ReviewSeeder::class,

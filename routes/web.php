@@ -12,6 +12,7 @@ use App\Http\Controllers\{CartController,
     ProfileController,
     Admin\DashboardController as AdminDashboardController,
     Admin\UsersController as AdminUsersController,
+    Admin\ProductsController as AdminProductsController,
     WalletController};
 
 /**
@@ -106,6 +107,19 @@ Route::prefix('admin')
             Route::get('/create', 'create');
             Route::post('/store', 'store');
             Route::prefix('{user}')->group(function() {
+                Route::get('/edit', 'edit');
+                Route::post('/update', 'update');
+                Route::get('/delete', 'delete');
+            });
+        });
+
+        // Products Management
+        Route::prefix('products')->controller(AdminProductsController::class)->group(function () {
+            Route::get('/', 'index');
+            Route::get('/grid', 'grid')->name('products.grid');
+            Route::get('/create', 'create');
+            Route::post('/store', 'store');
+            Route::prefix('{product}')->group(function() {
                 Route::get('/edit', 'edit');
                 Route::post('/update', 'update');
                 Route::get('/delete', 'delete');

@@ -19,7 +19,7 @@ class ProductSeeder extends Seeder
                 'short_description' => 'پرچمدار سامسونگ',
                 'description' => 'توضیحات کامل مربوط به گوشی تلفن سامسونگ گلکسی اس ۲۳',
                 'price' => 45000000,
-                'thumbnail' => 'products/s23/main.jpg',
+//                'thumbnail' => 'products/',
             ],
             [
                 'category_id' => 7,
@@ -28,7 +28,7 @@ class ProductSeeder extends Seeder
                 'slug' => 'iphone-14',
                 'short_description' => 'پرچمدار اپل',
                 'price' => 60000000,
-                'thumbnail' => 'products/iphone14/main.jpg',
+//                'thumbnail' => 'products/iphone14/main.jpg',
             ],
             [
                 'category_id' => 9,
@@ -37,7 +37,7 @@ class ProductSeeder extends Seeder
                 'short_description' => 'کیفیت صدای عالی و باتری ۳۰ ساعته.',
                 'slug' => 'headphone-JBL',
                 'price' => 3500000,
-                'thumbnail' => 'jbl-headphones.jpg',
+//                'thumbnail' => 'jbl-headphones.jpg',
             ]
         ];
 

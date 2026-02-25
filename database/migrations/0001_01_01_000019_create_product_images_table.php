@@ -18,7 +18,7 @@ return new class extends Migration
                 ->constrained()
                 ->cascadeOnDelete();
 
-            $table->string('path');
+            $table->string('extension');
             $table->string('alt')->nullable();
             $table->unsignedInteger('sort_order')->default(0);
             $table->boolean('is_primary')->default(false);

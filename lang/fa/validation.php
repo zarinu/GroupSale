@@ -194,6 +194,7 @@ return [
         'verify_code' => 'کد تایید',
         'rate' => 'امتیاز',
         'content' => 'محتوا',
+        'price' => 'قیمت',
     ],
 
 ];

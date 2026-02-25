@@ -27,6 +27,7 @@
 {{--    <link href="https://cdn.datatables.net/v/dt/dt-1.13.8/datatables.min.css" rel="stylesheet">--}}
     <link rel="stylesheet" href="{{ asset('/assets/admin/downloaded/datatables.min.css') }}">
 
+    @livewireStyles
     @stack('styles')
 </head>
 <body class="hold-transition sidebar-mini">
@@ -112,6 +113,7 @@
 {{--<script src="https://cdn.datatables.net/v/dt/dt-1.13.8/datatables.min.js"></script>--}}
 <script src="{{ asset('/assets/admin/downloaded/datatables.min.js') }}"></script>
 
+@livewireScripts
 @stack('scripts')
 </body>
 </html>
